@@ -16,7 +16,7 @@ import com.nineoldandroids.animation.ValueAnimator;
  * Created by panyi on 2015/8/4.
  */
 public class DiscView extends FrameLayout {
-    public static final int ANIMATION_DURING = 1000;
+    public static final int ANIMATION_DURING = 1300;
 
     private CircleView mCircleView;
     private ValueAnimator animator;
