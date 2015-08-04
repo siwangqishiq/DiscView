@@ -1,9 +1,5 @@
 package com.xinlan.circleviewdemo;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.IntEvaluator;
-import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -16,6 +12,8 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
+
+import com.nineoldandroids.animation.ValueAnimator;
 
 /**
  * Created by panyi on 2015/8/4.
@@ -58,9 +56,8 @@ public class CircleView extends View {
         paint.setColor(Color.WHITE);//圆圈颜色
         paint.setStyle(Paint.Style.STROKE);//设置空心
         paint.setStrokeWidth(stokenWidth);//圆圈宽度设置
-//        paint.setStrokeJoin(Paint.Join.ROUND);
-//        paint.setStrokeCap(Paint.Cap.ROUND); //设置圆角
-
+        paint.setStrokeJoin(Paint.Join.ROUND);
+        paint.setStrokeCap(Paint.Cap.ROUND); //设置圆角
 
         //绘制虚线
         PathEffect effects = new DashPathEffect(new float[]{5, 5, 5, 5}, 10);

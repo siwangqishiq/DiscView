@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.xinlan.circleviewdemo"
-        minSdkVersion 14
+        minSdkVersion 9
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -22,4 +22,5 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.2.1'
+    compile files('libs/nineoldandroids-2.4.0.jar')
 }
