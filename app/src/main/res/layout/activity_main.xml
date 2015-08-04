@@ -9,8 +9,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
 
-    <com.xinlan.circleviewdemo.CircleView
-        android:id="@+id/circle"
+    <com.xinlan.circleviewdemo.DiscView
+        android:id="@+id/disc_view"
         android:layout_width="fill_parent"
         android:layout_height="200dp" />
 
@@ -18,7 +18,7 @@
         android:id="@+id/btn"
         android:layout_marginTop="20dp"
         android:text="test"
-        android:layout_below="@id/circle"
+        android:layout_below="@id/disc_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />

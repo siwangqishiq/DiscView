@@ -22,12 +22,11 @@ public class CircleView extends View {
     public static final int MIN_VALUE = 0;
     public static final int MAX_VALUE = 300;
 
-    private int stokenWidth = 20;
+    private int stokenWidth = 25;
     private int angle = 100;
 
     private Paint paint = new Paint();
     private RectF ovalRect = new RectF();
-    private ValueAnimator animator;
 
     public CircleView(Context context) {
         super(context);
@@ -51,8 +50,6 @@ public class CircleView extends View {
     }
 
     private void initView(Context mContext) {
-        animator = ValueAnimator.ofInt(0, 0);//属性动画差值器
-
         paint.setColor(Color.WHITE);//圆圈颜色
         paint.setStyle(Paint.Style.STROKE);//设置空心
         paint.setStrokeWidth(stokenWidth);//圆圈宽度设置
@@ -91,27 +88,7 @@ public class CircleView extends View {
      * @param value
      */
     public void setValue(int value) {
-        if (animator.isRunning()) {//上次动画未结束
-            animator.cancel();//取消上次动画
-        }
-
-        animator = ValueAnimator.ofInt(0, value);
-        animator.setInterpolator(new AccelerateDecelerateInterpolator());//先加速 后减速差值
-        animator.setDuration(2000);
-        animator.start();
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                angle = (int) animation.getAnimatedValue();
-                invalidate();//重新设置数值
-            }
-        });
-
-//        animator.addListener(new AnimatorListenerAdapter() {
-//            @Override
-//            public void onAnimationEnd(Animator animation) {
-//                CircleView.this.animate().translationXBy(100).start();
-//            }
-//        });
+        angle = value;
+        invalidate();//重新设置数值
     }
 }//end class

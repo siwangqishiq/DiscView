@@ -7,21 +7,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    private CircleView mCircleView;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private DiscView mDiscView;
     private Button mBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mCircleView = (CircleView)findViewById(R.id.circle);
-        mBtn = (Button)findViewById(R.id.btn);
+        mDiscView = (DiscView) findViewById(R.id.disc_view);
+        mBtn = (Button) findViewById(R.id.btn);
         mBtn.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        mCircleView.setStrokenWidth(30);
-        mCircleView.setValue(358);
+//        mCircleView.setStrokenWidth(30);
+        mDiscView.setValue(340);
     }
 }//end class
