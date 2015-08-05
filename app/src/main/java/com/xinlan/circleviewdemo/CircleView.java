@@ -83,7 +83,7 @@ public class CircleView extends View {
         extraCirclePaint.setColor(mRadiusColor);//圆为白色
         extraCirclePaint.setStyle(Paint.Style.STROKE);//设置空心
         extraCirclePaint.setStrokeWidth(EXTRA_CIRCLE_WIDTH);//圆圈宽度设置
-        //extraCirclePaint.setAntiAlias(true);//反锯齿
+        extraCirclePaint.setAntiAlias(true);//反锯齿
     }
 
     //内圆设置
@@ -112,10 +112,13 @@ public class CircleView extends View {
             case CIRCLE_MODE_ROUND:
                 paint.setStrokeJoin(Paint.Join.ROUND);
                 paint.setStrokeCap(Paint.Cap.ROUND); //设置圆角
+                bottomPaint.setStrokeJoin(Paint.Join.ROUND);
+                bottomPaint.setStrokeCap(Paint.Cap.ROUND); //设置圆角
                 break;
             case CIRCLE_MODE_DOT:
                 PathEffect effects = new DashPathEffect(new float[]{5, 5, 5, 5}, 10);
                 paint.setPathEffect(effects);
+                bottomPaint.setPathEffect(effects);
                 break;
             default:
         }//end switch
