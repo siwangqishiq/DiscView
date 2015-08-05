@@ -18,6 +18,9 @@
         <!--底部圆形是否显示-->
         <attr name="dvBottomCircleIsShow" format="boolean" />
 
+        <!--圆形指示图片-->
+        <attr name="dvIndicatorDraw" format="reference"/>
+
         <!--圆盘模式-->
         <attr name="dvCircleMode">
             <enum name="normal" value="1" />

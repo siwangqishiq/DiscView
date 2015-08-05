@@ -2,11 +2,13 @@ package com.xinlan.circleviewdemo;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.PathEffect;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -44,6 +46,10 @@ public class CircleView extends View {
 
     protected boolean isBottomCircleShow = false;//底部圆是否显示  默认不显示
     private Paint bottomPaint = new Paint();
+
+    private Bitmap indicatorBitmap;//圆形指示器Bitmap
+    private RectF bitDistRect;
+    private Rect bitSrcRect;
 
     public CircleView(Context context) {
         super(context);
@@ -84,6 +90,16 @@ public class CircleView extends View {
         extraCirclePaint.setStyle(Paint.Style.STROKE);//设置空心
         extraCirclePaint.setStrokeWidth(EXTRA_CIRCLE_WIDTH);//圆圈宽度设置
         extraCirclePaint.setAntiAlias(true);//反锯齿
+    }
+
+    protected void setIndicatorBit(Bitmap bit) {
+        indicatorBitmap = bit;
+        if (indicatorBitmap != null) {
+            System.out.println("w-->" + indicatorBitmap.getWidth());
+            System.out.println("h-->" + indicatorBitmap.getHeight());
+            bitSrcRect = new Rect(0, 0, indicatorBitmap.getWidth(), indicatorBitmap.getHeight());
+            bitDistRect = new RectF(0, 0, bitSrcRect.width(), bitSrcRect.height());
+        }//end if
     }
 
     //内圆设置
@@ -164,6 +180,17 @@ public class CircleView extends View {
         }
         //主圆绘制
         canvas.drawArc(ovalRect, 0, angle, false, paint);
+
+        //绘制指示器
+        if (indicatorBitmap != null) {
+            //角度制转弧度制
+            double radAngle = Math.toRadians(angle);
+            //圆的参数方程确定坐标点
+            int x = (int) (radius * Math.cos(radAngle)) + centerX;
+            int y = (int) (radius * Math.sin(radAngle)) + centerY;
+            bitDistRect.set(x, y, x + bitDistRect.width(), y + bitDistRect.height());
+            canvas.drawBitmap(indicatorBitmap, bitSrcRect, bitDistRect, null);
+        }//end if
 
         //内圆绘制
         if (mInnerCircleIsShow) {//内圆显示

@@ -3,6 +3,9 @@ package com.xinlan.circleviewdemo;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -79,6 +82,11 @@ public class DiscView extends FrameLayout {
         mCircleView.mInnerCircleIsShow = a.getBoolean(R.styleable.DiscView_dvInnerCircleShow, mCircleView.mInnerCircleIsShow);
         mCircleView.mInnerCirclePad = a.getDimensionPixelSize(R.styleable.DiscView_dvInnerCirclePad, mCircleView.mInnerCirclePad);//外圆边距
         mCircleView.isBottomCircleShow = a.getBoolean(R.styleable.DiscView_dvBottomCircleIsShow, false);
+        Drawable bitDrawable = a.getDrawable(R.styleable.DiscView_dvIndicatorDraw);
+        Bitmap indicatorBit = null;
+        if (bitDrawable != null) {
+            indicatorBit = DiscViewUtils.drawableToBitmap(bitDrawable);
+        }
         a.recycle();
 
         mCircleView.setStrokenWidth(mCircleView.stokenWidth);
@@ -87,6 +95,8 @@ public class DiscView extends FrameLayout {
         mCircleView.setRadiusColor(mCircleView.mRadiusColor);
         mCircleView.setInnerCircle(mCircleView.mInnerCircleIsShow, mCircleView.mInnerCirclePad);
         mCircleView.setBottomCircleShow(mCircleView.isBottomCircleShow);
+
+        mCircleView.setIndicatorBit(indicatorBit);
     }
 
     public void setValue(int value) {
