@@ -8,8 +8,6 @@
         <!--外装饰圆距离圆环边距-->
         <attr name="dvOuterCirclePad" format="dimension" />
 
-
-
         <!--圆盘模式-->
         <attr name="dvCircleMode">
             <enum name="normal" value="1" />

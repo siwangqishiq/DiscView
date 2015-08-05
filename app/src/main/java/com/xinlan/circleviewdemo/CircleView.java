@@ -29,12 +29,12 @@ public class CircleView extends View {
     protected int mCircleMode = CIRCLE_MODE_NORMAL;//圆环模式 默认为普通模式
 
     private static final int EXTRA_CIRCLE_WIDTH = 1;
-    protected boolean outerCircleIsShow = false;//外部圆环是否显示  默认不显示
-    protected int outerCirclePad = 3;//外部圆环距离主圆环边距
-
+    protected boolean mOuterCircleIsShow = false;//外部圆环是否显示  默认不显示
+    protected int mOuterCirclePad = 20;//外部圆环距离主圆环边距
+    private Paint extraCirclePaint = new Paint();
 
     protected int stokenWidth = 20;//圆环宽度
-    private int angle = 0;
+    private int angle = 30;
     private Paint paint = new Paint();//绘制主圆环画笔
     private RectF ovalRect = new RectF();
 
@@ -66,7 +66,23 @@ public class CircleView extends View {
         paint.setStyle(Paint.Style.STROKE);//设置空心
         paint.setStrokeWidth(stokenWidth);//圆圈宽度设置
 
-        setCircleMode(mCircleMode);
+        setCircleMode(mCircleMode);//设置圆环模式
+
+        //装饰圆形 Paint
+        extraCirclePaint.setColor(Color.WHITE);//圆为白色
+        extraCirclePaint.setStyle(Paint.Style.STROKE);//设置空心
+        extraCirclePaint.setStrokeWidth(EXTRA_CIRCLE_WIDTH);//圆圈宽度设置
+
+    }
+
+    //外圆设置
+    public void setOuterCircle(boolean isShow,int size){
+        this.mOuterCircleIsShow = isShow;
+        if (mOuterCircleIsShow) {//显示外圆
+            mOuterCirclePad = size;
+        } else {//不显示外圆
+            mOuterCirclePad = 0;
+        }//end if
     }
 
     //设置圆环模式
@@ -88,15 +104,30 @@ public class CircleView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.save();
-        canvas.rotate(90, getWidth() >> 1, getHeight() >> 1);
+
         int w = getWidth();
         int h = getHeight();
-        int radius = Math.min(w, h) >> 1;
-        int left = Math.abs(w - h) >> 1;
 
-        ovalRect.set(left + stokenWidth, stokenWidth, left + radius + radius - stokenWidth, radius + radius - stokenWidth);
+        //圆心点坐标
+        int centerX = w >> 1;
+        int centerY = h >> 1;
+
+        canvas.save();
+        canvas.rotate(90, centerX, centerY);//坐标系旋转
+
+        int outerCircleRadius = (Math.min(w, h) >> 1) - PAD ;//外圆半径
+        if (mOuterCircleIsShow) {//外装饰圆显示
+            canvas.drawCircle(centerX, centerY, outerCircleRadius, extraCirclePaint);
+        }
+
+        //主圆绘制
+        int radius = outerCircleRadius - mOuterCirclePad - (stokenWidth>>1);
+        int left = (w >> 1) - radius;
+        int top = (h >> 1) - radius;
+        ovalRect.set(left, top,
+                left + radius + radius, top + radius + radius);
         canvas.drawArc(ovalRect, 0, angle, false, paint);
+
         canvas.restore();
     }
 
