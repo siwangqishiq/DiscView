@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="DiscView">
+        <!--圆圈线的宽度-->
+        <attr name="dvStrokenWidth" format="dimension" />
+    </declare-styleable>
+</resources>
