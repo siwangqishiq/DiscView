@@ -17,8 +17,9 @@
         app:dvInnerCirclePad="10dp"
         app:dvInnerCircleShow="false"
         app:dvOuterCirclePad="8dp"
+        app:dvBottomCircleIsShow="true"
         app:dvOuterCircleShow="false"
-        app:dvStrokenWidth="15dp" />
+        app:dvStrokenWidth="11dp" />
 
     <Button
         android:id="@+id/btn"

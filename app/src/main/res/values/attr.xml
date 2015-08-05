@@ -15,6 +15,9 @@
         <!--内部装饰圆距离圆环边距-->
         <attr name="dvInnerCirclePad" format="dimension" />
 
+        <!--底部圆形是否显示-->
+        <attr name="dvBottomCircleIsShow" format="boolean" />
+
         <!--圆盘模式-->
         <attr name="dvCircleMode">
             <enum name="normal" value="1" />
@@ -22,6 +25,5 @@
             <enum name="dot" value="3" />
         </attr>
     </declare-styleable>
-
 
 </resources>

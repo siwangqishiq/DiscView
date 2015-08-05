@@ -42,6 +42,9 @@ public class CircleView extends View {
     private RectF ovalRect = new RectF();
     protected int mRadiusColor = Color.WHITE;//圆环颜色
 
+    protected boolean isBottomCircleShow = false;//底部圆是否显示  默认不显示
+    private Paint bottomPaint = new Paint();
+
     public CircleView(Context context) {
         super(context);
         initView(context, null);
@@ -71,6 +74,9 @@ public class CircleView extends View {
         paint.setStrokeWidth(stokenWidth);//圆圈宽度设置
         //paint.setAntiAlias(true);//反锯齿
 
+        bottomPaint.setStyle(Paint.Style.STROKE);//设置空心
+        bottomPaint.setStrokeWidth(stokenWidth);//圆圈宽度设置
+
         setCircleMode(mCircleMode);//设置圆环模式
 
         //装饰圆形 Paint
@@ -83,27 +89,20 @@ public class CircleView extends View {
     //内圆设置
     protected void setInnerCircle(boolean isShow, int pad) {
         this.mInnerCircleIsShow = isShow;
-        if (mInnerCircleIsShow) {//显示内部圆
-            mInnerCirclePad = pad;
-        } else {
-            mInnerCirclePad = 0;
-        }//end if
+        mInnerCirclePad = mInnerCircleIsShow ? pad : 0;
     }
 
     //外圆设置
     protected void setOuterCircle(boolean isShow, int pad) {
         this.mOuterCircleIsShow = isShow;
-        if (mOuterCircleIsShow) {//显示外圆
-            mOuterCirclePad = pad;
-        } else {//不显示外圆
-            mOuterCirclePad = 0;
-        }//end if
+        mOuterCirclePad = mOuterCircleIsShow ? pad : 0;
     }
 
     //设置圆圈颜色
     public void setRadiusColor(int color) {
         this.mRadiusColor = color;
         paint.setColor(mRadiusColor);
+        setBottomCircleShow(isBottomCircleShow);
     }
 
     //设置圆环模式
@@ -120,6 +119,15 @@ public class CircleView extends View {
                 break;
             default:
         }//end switch
+    }
+
+    //设置底部圆是否显示
+    protected void setBottomCircleShow(boolean isShow) {
+        isBottomCircleShow = isShow;
+        if (isBottomCircleShow) {//修改绘制Paint参数
+            bottomPaint.setColor(paint.getColor());
+            bottomPaint.setAlpha(0x33);
+        }//end if
     }
 
     @Override
@@ -141,12 +149,17 @@ public class CircleView extends View {
             canvas.drawCircle(centerX, centerY, outerCircleRadius, extraCirclePaint);
         }
 
-        //主圆绘制
+        //draw Main
         int radius = outerCircleRadius - mOuterCirclePad - (stokenWidth >> 1);
         int left = (w >> 1) - radius;
         int top = (h >> 1) - radius;
         ovalRect.set(left, top,
                 left + radius + radius, top + radius + radius);
+        //绘制底部圆
+        if (isBottomCircleShow) {//底部圆显示
+            canvas.drawArc(ovalRect, 0, 360, false, bottomPaint);
+        }
+        //主圆绘制
         canvas.drawArc(ovalRect, 0, angle, false, paint);
 
         //内圆绘制
@@ -163,6 +176,7 @@ public class CircleView extends View {
             throw new IllegalStateException("size can not be zero or -1");
         stokenWidth = size;
         paint.setStrokeWidth(stokenWidth);//圆圈宽度设置
+        bottomPaint.setStrokeWidth(stokenWidth);//底部圆圈宽度 应与主圆保持一致
     }
 
     /**
