@@ -3,6 +3,8 @@
     <declare-styleable name="DiscView">
         <!--圆圈线的宽度-->
         <attr name="dvStrokenWidth" format="dimension" />
+        <!--圆圈颜色-->
+        <attr name="dvStrokenColor" format="color" />
         <!--外装饰圆是否显示-->
         <attr name="dvOuterCircleShow" format="boolean" />
         <!--外装饰圆距离圆环边距-->
@@ -15,4 +17,6 @@
             <enum name="dot" value="3" />
         </attr>
     </declare-styleable>
+
+
 </resources>

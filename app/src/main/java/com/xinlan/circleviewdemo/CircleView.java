@@ -37,6 +37,7 @@ public class CircleView extends View {
     private int angle = 30;
     private Paint paint = new Paint();//绘制主圆环画笔
     private RectF ovalRect = new RectF();
+    protected int mRadiusColor = Color.WHITE;//圆环颜色
 
     public CircleView(Context context) {
         super(context);
@@ -62,27 +63,35 @@ public class CircleView extends View {
     private void initView(Context mContext, AttributeSet attrs) {
         this.mContext = mContext;
 
-        paint.setColor(Color.WHITE);//圆圈颜色
+        paint.setColor(mRadiusColor);//圆圈颜色
         paint.setStyle(Paint.Style.STROKE);//设置空心
         paint.setStrokeWidth(stokenWidth);//圆圈宽度设置
 
         setCircleMode(mCircleMode);//设置圆环模式
 
         //装饰圆形 Paint
-        extraCirclePaint.setColor(Color.WHITE);//圆为白色
+        extraCirclePaint.setColor(mRadiusColor);//圆为白色
         extraCirclePaint.setStyle(Paint.Style.STROKE);//设置空心
         extraCirclePaint.setStrokeWidth(EXTRA_CIRCLE_WIDTH);//圆圈宽度设置
 
+
     }
 
+
     //外圆设置
-    public void setOuterCircle(boolean isShow,int size){
+    protected void setOuterCircle(boolean isShow, int size) {
         this.mOuterCircleIsShow = isShow;
         if (mOuterCircleIsShow) {//显示外圆
             mOuterCirclePad = size;
         } else {//不显示外圆
             mOuterCirclePad = 0;
         }//end if
+    }
+
+    //设置圆圈颜色
+    public void setRadiusColor(int color) {
+        this.mRadiusColor = color;
+        paint.setColor(mRadiusColor);
     }
 
     //设置圆环模式
@@ -115,13 +124,13 @@ public class CircleView extends View {
         canvas.save();
         canvas.rotate(90, centerX, centerY);//坐标系旋转
 
-        int outerCircleRadius = (Math.min(w, h) >> 1) - PAD ;//外圆半径
+        int outerCircleRadius = (Math.min(w, h) >> 1) - PAD;//外圆半径
         if (mOuterCircleIsShow) {//外装饰圆显示
             canvas.drawCircle(centerX, centerY, outerCircleRadius, extraCirclePaint);
         }
 
         //主圆绘制
-        int radius = outerCircleRadius - mOuterCirclePad - (stokenWidth>>1);
+        int radius = outerCircleRadius - mOuterCirclePad - (stokenWidth >> 1);
         int left = (w >> 1) - radius;
         int top = (h >> 1) - radius;
         ovalRect.set(left, top,

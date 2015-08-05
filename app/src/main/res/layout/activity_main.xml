@@ -15,9 +15,9 @@
         android:layout_width="fill_parent"
         android:layout_height="200dp"
         app:dvCircleMode="normal"
-        app:dvStrokenWidth="20dp"
-        app:dvOuterCirclePad="10dp"
-        app:dvOuterCircleShow="false" />
+        app:dvStrokenWidth="15dp"
+        app:dvOuterCirclePad="8dp"
+        app:dvOuterCircleShow="true" />
 
     <Button
         android:id="@+id/btn"

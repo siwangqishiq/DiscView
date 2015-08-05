@@ -71,11 +71,15 @@ public class DiscView extends FrameLayout {
         //读取外装饰圆圈是否显示
         mCircleView.mOuterCircleIsShow = a.getBoolean(R.styleable.DiscView_dvOuterCircleShow, mCircleView.mOuterCircleIsShow);
         mCircleView.mOuterCirclePad = a.getDimensionPixelSize(R.styleable.DiscView_dvOuterCirclePad, mCircleView.mOuterCirclePad);//外圆边距
+
+        //读取圆圈颜色设置
+        mCircleView.mRadiusColor = a.getColor(R.styleable.DiscView_dvStrokenColor, mCircleView.mRadiusColor);
         a.recycle();
 
         mCircleView.setStrokenWidth(mCircleView.stokenWidth);
         mCircleView.setCircleMode(mCircleView.mCircleMode);
         mCircleView.setOuterCircle(mCircleView.mOuterCircleIsShow, mCircleView.mOuterCirclePad);
+        mCircleView.setRadiusColor(mCircleView.mRadiusColor);
     }
 
     public void setValue(int value) {
