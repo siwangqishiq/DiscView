@@ -3,5 +3,13 @@
     <declare-styleable name="DiscView">
         <!--圆圈线的宽度-->
         <attr name="dvStrokenWidth" format="dimension" />
+        <attr name="dvOuterCircleShow" format="boolean" />
+        <attr name="dvOuterCirclePad" format="dimension" />
+
+        <attr name="dvCircleMode">
+            <enum name="normal" value="1" />
+            <enum name="round" value="2" />
+            <enum name="dot" value="3" />
+        </attr>
     </declare-styleable>
 </resources>

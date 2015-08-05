@@ -20,9 +20,6 @@ public class DiscView extends FrameLayout {
     public static final int ANIMATION_DURING = 1300;
 
     private Context mContext;
-
-    private int stokenWidth = 20;//圆盘宽度
-
     private CircleView mCircleView;
     private ValueAnimator animator;
     private TextView headText;//头部Text
@@ -67,11 +64,13 @@ public class DiscView extends FrameLayout {
     //配置属性读取并配置
     private void readAttributeAndSet(Context context, AttributeSet attrs) {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DiscView);
-        stokenWidth = a.getDimensionPixelSize(R.styleable.DiscView_dvStrokenWidth, stokenWidth);
+        mCircleView.stokenWidth = a.getDimensionPixelSize(R.styleable.DiscView_dvStrokenWidth,
+                mCircleView.stokenWidth);//宽度属性读取
+        mCircleView.mCircleMode = a.getInt(R.styleable.DiscView_dvCircleMode, mCircleView.mCircleMode);//读取圆环模式
         a.recycle();
 
-        mCircleView.setStrokenWidth(stokenWidth);
-        System.out.println("stokenWidth--->" + stokenWidth);
+        mCircleView.setStrokenWidth(mCircleView.stokenWidth);
+        mCircleView.setCircleMode(mCircleView.mCircleMode);
     }
 
     public void setValue(int value) {

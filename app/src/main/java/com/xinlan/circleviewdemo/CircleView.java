@@ -2,7 +2,6 @@ package com.xinlan.circleviewdemo;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
@@ -21,14 +20,22 @@ public class CircleView extends View {
     public static final int MIN_VALUE = 0;
     public static final int MAX_VALUE = 300;
 
-    private static final int EXTRA_CIRCLE_WIDTH = 1;
-
     private Context mContext;
 
-    private int stokenWidth = 20;
-    private int angle = 0;
+    //圆环模式
+    private static final int CIRCLE_MODE_NORMAL = 1;//普通模式
+    private static final int CIRCLE_MODE_ROUND = 2;//圆角模式(文艺模式)
+    private static final int CIRCLE_MODE_DOT = 3;//虚线模式(2B模式)
+    protected int mCircleMode = CIRCLE_MODE_NORMAL;//圆环模式 默认为普通模式
 
-    private Paint paint = new Paint();
+    private static final int EXTRA_CIRCLE_WIDTH = 1;
+    protected boolean outerCircleIsShow = false;//外部圆环是否显示  默认不显示
+    protected int outerCirclePad = 3;//外部圆环距离主圆环边距
+
+
+    protected int stokenWidth = 20;//圆环宽度
+    private int angle = 0;
+    private Paint paint = new Paint();//绘制主圆环画笔
     private RectF ovalRect = new RectF();
 
     public CircleView(Context context) {
@@ -58,12 +65,24 @@ public class CircleView extends View {
         paint.setColor(Color.WHITE);//圆圈颜色
         paint.setStyle(Paint.Style.STROKE);//设置空心
         paint.setStrokeWidth(stokenWidth);//圆圈宽度设置
-//        paint.setStrokeJoin(Paint.Join.ROUND);
-//        paint.setStrokeCap(Paint.Cap.ROUND); //设置圆角
-//
-//        //绘制虚线
-//        PathEffect effects = new DashPathEffect(new float[]{5, 5, 5, 5}, 10);
-//        paint.setPathEffect(effects);
+
+        setCircleMode(mCircleMode);
+    }
+
+    //设置圆环模式
+    protected void setCircleMode(int mode) {
+        mCircleMode = mode;
+        switch (mCircleMode) {
+            case CIRCLE_MODE_ROUND:
+                paint.setStrokeJoin(Paint.Join.ROUND);
+                paint.setStrokeCap(Paint.Cap.ROUND); //设置圆角
+                break;
+            case CIRCLE_MODE_DOT:
+                PathEffect effects = new DashPathEffect(new float[]{5, 5, 5, 5}, 10);
+                paint.setPathEffect(effects);
+                break;
+            default:
+        }//end switch
     }
 
     @Override

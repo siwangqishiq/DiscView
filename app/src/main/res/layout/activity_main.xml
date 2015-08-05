@@ -14,8 +14,9 @@
         android:id="@+id/disc_view"
         android:layout_width="fill_parent"
         android:layout_height="200dp"
-        app:dvStrokenWidth="1dp"
-        android:background="#4400ff00" />
+        android:background="#4400ff00"
+        app:dvCircleMode="round"
+        app:dvStrokenWidth="10dp" />
 
     <Button
         android:id="@+id/btn"
