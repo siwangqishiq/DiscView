@@ -23,6 +23,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 //        mCircleView.setStrokenWidth(30);
-        mDiscView.setValue(340);
+        mDiscView.setValue(330);
     }
 }//end class

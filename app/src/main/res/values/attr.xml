@@ -3,9 +3,14 @@
     <declare-styleable name="DiscView">
         <!--圆圈线的宽度-->
         <attr name="dvStrokenWidth" format="dimension" />
+        <!--外装饰圆是否显示-->
         <attr name="dvOuterCircleShow" format="boolean" />
+        <!--外装饰圆距离圆环边距-->
         <attr name="dvOuterCirclePad" format="dimension" />
 
+
+
+        <!--圆盘模式-->
         <attr name="dvCircleMode">
             <enum name="normal" value="1" />
             <enum name="round" value="2" />
