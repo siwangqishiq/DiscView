@@ -33,6 +33,9 @@ public class CircleView extends View {
     protected int mOuterCirclePad = 20;//外部圆环距离主圆环边距
     private Paint extraCirclePaint = new Paint();
 
+    protected boolean mInnerCircleIsShow = false;//内装饰圆是否显示
+    protected int mInnerCirclePad = 20;
+
     protected int stokenWidth = 20;//圆环宽度
     private int angle = 30;
     private Paint paint = new Paint();//绘制主圆环画笔
@@ -66,6 +69,7 @@ public class CircleView extends View {
         paint.setColor(mRadiusColor);//圆圈颜色
         paint.setStyle(Paint.Style.STROKE);//设置空心
         paint.setStrokeWidth(stokenWidth);//圆圈宽度设置
+        //paint.setAntiAlias(true);//反锯齿
 
         setCircleMode(mCircleMode);//设置圆环模式
 
@@ -73,16 +77,24 @@ public class CircleView extends View {
         extraCirclePaint.setColor(mRadiusColor);//圆为白色
         extraCirclePaint.setStyle(Paint.Style.STROKE);//设置空心
         extraCirclePaint.setStrokeWidth(EXTRA_CIRCLE_WIDTH);//圆圈宽度设置
-
-
+        //extraCirclePaint.setAntiAlias(true);//反锯齿
     }
 
+    //内圆设置
+    protected void setInnerCircle(boolean isShow, int pad) {
+        this.mInnerCircleIsShow = isShow;
+        if (mInnerCircleIsShow) {//显示内部圆
+            mInnerCirclePad = pad;
+        } else {
+            mInnerCirclePad = 0;
+        }//end if
+    }
 
     //外圆设置
-    protected void setOuterCircle(boolean isShow, int size) {
+    protected void setOuterCircle(boolean isShow, int pad) {
         this.mOuterCircleIsShow = isShow;
         if (mOuterCircleIsShow) {//显示外圆
-            mOuterCirclePad = size;
+            mOuterCirclePad = pad;
         } else {//不显示外圆
             mOuterCirclePad = 0;
         }//end if
@@ -136,6 +148,12 @@ public class CircleView extends View {
         ovalRect.set(left, top,
                 left + radius + radius, top + radius + radius);
         canvas.drawArc(ovalRect, 0, angle, false, paint);
+
+        //内圆绘制
+        if (mInnerCircleIsShow) {//内圆显示
+            int innerRadius = radius - (stokenWidth >> 1) - mInnerCirclePad - EXTRA_CIRCLE_WIDTH;
+            canvas.drawCircle(centerX, centerY, innerRadius, extraCirclePaint);
+        }
 
         canvas.restore();
     }
