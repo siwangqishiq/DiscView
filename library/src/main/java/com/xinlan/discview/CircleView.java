@@ -1,4 +1,4 @@
-package com.xinlan.circleviewdemo;
+package com.xinlan.discview;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -39,7 +39,7 @@ public class CircleView extends View {
     protected int mInnerCirclePad = 20;
 
     protected int stokenWidth = 20;//圆环宽度
-    private int angle = 30;
+    private int angle = 0;
     private Paint paint = new Paint();//绘制主圆环画笔
     private RectF ovalRect = new RectF();
     protected int mRadiusColor = Color.WHITE;//圆环颜色

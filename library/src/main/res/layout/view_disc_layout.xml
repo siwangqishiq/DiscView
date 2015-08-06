@@ -2,7 +2,7 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <com.xinlan.circleviewdemo.CircleView
+    <com.xinlan.discview.CircleView
         android:id="@+id/circle_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="广告收益"
+            android:text=""
             android:textSize="15sp" />
 
         <TextView
@@ -28,9 +28,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:gravity="center_horizontal"
-            android:text="广告收益"
+            android:text="Hello"
             android:textColor="#ffffff"
-            android:textSize="30sp"
+            android:textSize="32sp"
             android:textStyle="bold" />
 
         <TextView
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="1个任务  28次点击"
+            android:text=""
             android:textSize="15sp" />
     </LinearLayout>
 </merge>

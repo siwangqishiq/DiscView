@@ -10,17 +10,11 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
 
-    <com.xinlan.circleviewdemo.DiscView
+    <com.xinlan.discview.DiscView
+        android:padding="10dp"
         android:id="@+id/disc_view"
         android:layout_width="fill_parent"
-        android:layout_height="220dp"
-        app:dvStartRotateAngle="40"
-        app:dvAngleRotateSpan="280"
-        app:dvCircleMode="dot"
-        app:dvInnerCircleShow="true"
-        app:dvBottomCircleIsShow="true"
-        app:dvOuterCircleShow="false"
-        app:dvStrokenWidth="11dp" />
+        android:layout_height="220dp" />
 
     <Button
         android:id="@+id/btn"

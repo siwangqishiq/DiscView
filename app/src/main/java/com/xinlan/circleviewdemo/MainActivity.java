@@ -1,11 +1,11 @@
 package com.xinlan.circleviewdemo;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+
+import com.xinlan.discview.DiscView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private DiscView mDiscView;
@@ -23,6 +23,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 //        mCircleView.setStrokenWidth(30);
-        mDiscView.setValue(201,201*5);
+        mDiscView.setValue(230);
     }
 }//end class
