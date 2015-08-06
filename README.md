@@ -13,8 +13,8 @@
 
 使用方式:
 
-xml布局
- <com.xinlan.discview.DiscView<br/>
+xml布局:<br />
+ <span><</span>com.xinlan.discview.DiscView<br/>
         app:dvStrokenWidth="10dp"                         <br/> <!--圆盘宽度-->  <br/>
         app:dvStrokenColor="#000000"                     <br/> <!--圆盘颜色-->   <br/>
         app:dvOuterCircleShow="true"                      <br/> <!--外装饰圆是否显示-->   <br/>
