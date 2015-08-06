@@ -14,21 +14,21 @@
 使用方式:
 
 xml布局
- <com.xinlan.discview.DiscView
-        app:dvStrokenWidth="10dp"                          <!--圆盘宽度-->
-        app:dvStrokenColor="#000000"                      <!--圆盘颜色-->
-        app:dvOuterCircleShow="true"                       <!--外装饰圆是否显示-->
-        app:dvOuterCirclePad="5dp"                          <!--外装饰圆与圆盘距离->
-        app:dvInnerCircleShow="true"                        <!--内装饰圆是否显示-->
-        app:dvInnerCirclePad="4dp"                           <!--内部装饰圆距离圆环边距-->
-        app:dvBottomCircleIsShow="true"                   <!--底部圆形是否显示-->
-        app:dvIndicatorDraw="@drawable/icon"         <!--圆形指示图片-->
-        app:dvStartRotateAngle="10"                          <!--圆盘开始旋转角度值-->
-        app:dvAngleRotateSpan="320"                        <!--圆盘可旋转角度范围-->
-        app:dvCircleMode="dot"                                  <!--圆盘模式                normal-普(pu)通(tong)模式   round-圆(wen)角(yi)模式   dot-虚(2)线(B)模式    -->
-        android:layout_width="fill_parent"
-        android:layout_height="220dp" />
-
+ <com.xinlan.discview.DiscView<br/>
+        app:dvStrokenWidth="10dp"                         <br/> <!--圆盘宽度-->  <br/>
+        app:dvStrokenColor="#000000"                     <br/> <!--圆盘颜色-->   <br/>
+        app:dvOuterCircleShow="true"                      <br/> <!--外装饰圆是否显示-->   <br/>
+        app:dvOuterCirclePad="5dp"                         <br/> <!--外装饰圆与圆盘距离->   <br/>
+        app:dvInnerCircleShow="true"                       <br/> <!--内装饰圆是否显示-->    <br/>
+        app:dvInnerCirclePad="4dp"                          <br/> <!--内部装饰圆距离圆环边距-->    <br/>
+        app:dvBottomCircleIsShow="true"                  <br/> <!--底部圆形是否显示-->    <br/>
+        app:dvIndicatorDraw="@drawable/icon"         <br/> <!--圆形指示图片-->    <br/>
+        app:dvStartRotateAngle="10"                         <br/> <!--圆盘开始旋转角度值-->    <br/>
+        app:dvAngleRotateSpan="320"                       <br/> <!--圆盘可旋转角度范围-->     <br/>
+        app:dvCircleMode="dot"                                 <br/> <!--圆盘模式                normal-普(pu)通(tong)模式   round-圆(wen)角(yi)模式   dot-虚(2)线(B)模式    -->  <br/>
+        android:layout_width="fill_parent" <br/>
+        android:layout_height="220dp" /><br/>
+<br/>
   code:
         mDiscView.setValue(int value);//设置数值
 
