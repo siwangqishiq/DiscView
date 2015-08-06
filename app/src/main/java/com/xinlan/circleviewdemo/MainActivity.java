@@ -1,28 +1,39 @@
 package com.xinlan.circleviewdemo;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
 
-import com.xinlan.discview.DiscView;
-
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private DiscView mDiscView;
-    private Button mBtn;
+public class MainActivity extends AppCompatActivity {
+    int[] layouts = {R.layout.fragment_1, R.layout.fragment_2, R.layout.fragment_3, R.layout.fragment_4};
+    private ViewPager mGallery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mDiscView = (DiscView) findViewById(R.id.disc_view);
-        mBtn = (Button) findViewById(R.id.btn);
-        mBtn.setOnClickListener(this);
+        mGallery = (ViewPager) findViewById(R.id.gallery);
+        mGallery.setOffscreenPageLimit(4);
+        mGallery.setAdapter(new GalleryAdapter(this.getSupportFragmentManager()));
     }
 
-    @Override
-    public void onClick(View v) {
-//        mCircleView.setStrokenWidth(30);
-        mDiscView.setValue(230);
-    }
+    private final class GalleryAdapter extends FragmentStatePagerAdapter {
+
+        public GalleryAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return SubFragment.newInstance(layouts[position]);
+        }
+
+        @Override
+        public int getCount() {
+            return layouts.length;
+        }
+    }//end inner class
 }//end class

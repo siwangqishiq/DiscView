@@ -54,6 +54,8 @@ public class CircleView extends View {
     protected int startRotateAngle = MIN_VALUE;//圆盘开始角度 默认为最底部0度
     protected int angleRotateSpan = MAX_VALUE;//圆盘可旋转角度范围
 
+    private RectF tempRect = new RectF();
+
     public CircleView(Context context) {
         super(context);
         initView(context, null);
@@ -166,7 +168,10 @@ public class CircleView extends View {
 
         int outerCircleRadius = (Math.min(w, h) >> 1) - PAD;//外圆半径
         if (mOuterCircleIsShow) {//外装饰圆显示
-            canvas.drawCircle(centerX, centerY, outerCircleRadius, extraCirclePaint);
+            //canvas.drawCircle(centerX, centerY, outerCircleRadius, extraCirclePaint);
+            tempRect.set(centerX - outerCircleRadius, centerY - outerCircleRadius,
+                    centerX + outerCircleRadius, centerY + outerCircleRadius);
+            canvas.drawArc(tempRect, 0, angleRotateSpan, false, extraCirclePaint);
         }
 
         //draw Main
@@ -185,7 +190,10 @@ public class CircleView extends View {
         //内圆绘制
         if (mInnerCircleIsShow) {//内圆显示
             int innerRadius = radius - (stokenWidth >> 1) - mInnerCirclePad - EXTRA_CIRCLE_WIDTH;
-            canvas.drawCircle(centerX, centerY, innerRadius, extraCirclePaint);
+            //canvas.drawCircle(centerX, centerY, innerRadius, extraCirclePaint);
+            tempRect.set(centerX - innerRadius, centerY - innerRadius,
+                    centerX + innerRadius, centerY + innerRadius);
+            canvas.drawArc(tempRect, 0, angleRotateSpan, false, extraCirclePaint);
         }
 
         //绘制指示器

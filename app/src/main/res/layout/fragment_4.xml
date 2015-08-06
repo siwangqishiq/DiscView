@@ -1,0 +1,25 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#132E05"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.xinlan.discview.DiscView
+        android:id="@+id/disc_view"
+        app:dvStrokenWidth="15dp"
+        app:dvBottomCircleIsShow="true"
+        app:dvStartRotateAngle="60"
+        app:dvAngleRotateSpan="240"
+        app:dvOuterCircleShow="true"
+        android:layout_width="fill_parent"
+        android:layout_height="220dp" />
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/disc_view"
+        android:layout_marginTop="20dp"
+        android:text="test" />
+
+</RelativeLayout>
