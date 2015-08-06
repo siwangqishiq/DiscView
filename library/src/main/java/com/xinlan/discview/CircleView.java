@@ -18,7 +18,7 @@ import android.view.View;
  * Created by panyi on 2015/8/4.
  */
 public class CircleView extends View {
-    public static final int PAD = 10;
+    public static final int PAD = 30;
     public static final int MIN_VALUE = 0;
     public static final int MAX_VALUE = 360;
 

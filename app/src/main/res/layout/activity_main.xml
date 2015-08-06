@@ -11,8 +11,8 @@
     tools:context=".MainActivity">
 
     <com.xinlan.discview.DiscView
-        android:padding="10dp"
         android:id="@+id/disc_view"
+        app:dvStrokenWidth="30dp"
         android:layout_width="fill_parent"
         android:layout_height="220dp" />
 

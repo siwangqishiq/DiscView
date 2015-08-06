@@ -9,11 +9,17 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.nineoldandroids.animation.Animator;
+import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.nineoldandroids.animation.ValueAnimator;
+import com.nineoldandroids.view.ViewHelper;
 
 /**
  * Created by panyi on 2015/8/4.
@@ -27,6 +33,8 @@ public class DiscView extends FrameLayout {
     private TextView headText;//头部Text
     private TextView contentValueText;//属性Text
     private TextView bottomText;//底部Text
+
+    private Animation afterAnimation;//设值完毕后动画
 
     public DiscView(Context context) {
         super(context);
@@ -61,6 +69,8 @@ public class DiscView extends FrameLayout {
         bottomText = (TextView) v.findViewById(R.id.bottom_title);
 
         readAttributeAndSet(context, attrs);
+
+        afterAnimation = AnimationUtils.loadAnimation(mContext, R.anim.scale_animation);
     }
 
     //配置属性读取并配置
@@ -88,9 +98,9 @@ public class DiscView extends FrameLayout {
         }
 
         //读取开始角度偏移量
-        mCircleView.startRotateAngle = a.getInteger(R.styleable.DiscView_dvStartRotateAngle,CircleView.MIN_VALUE);
+        mCircleView.startRotateAngle = a.getInteger(R.styleable.DiscView_dvStartRotateAngle, CircleView.MIN_VALUE);
         //读取圆盘可旋转范围
-        mCircleView.angleRotateSpan = a.getInteger(R.styleable.DiscView_dvAngleRotateSpan,CircleView.MAX_VALUE);
+        mCircleView.angleRotateSpan = a.getInteger(R.styleable.DiscView_dvAngleRotateSpan, CircleView.MAX_VALUE);
         a.recycle();
 
         mCircleView.setStrokenWidth(mCircleView.stokenWidth);
@@ -118,6 +128,7 @@ public class DiscView extends FrameLayout {
     public void setValue(int value, int duration) {
         if (animator.isRunning()) {//上次动画未结束
             animator.cancel();//取消上次动画
+            mCircleView.clearAnimation();
         }
 
         animator = ValueAnimator.ofInt(0, value);
@@ -133,11 +144,14 @@ public class DiscView extends FrameLayout {
             }
         });
 
-//        animator.addListener(new AnimatorListenerAdapter() {
-//            @Override
-//            public void onAnimationEnd(Animator animation) {
-//                CircleView.this.animate().translationXBy(100).start();
-//            }
-//        });
+        animator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mCircleView.startAnimation(afterAnimation);
+            }
+
+            public void onAnimationCancel(Animator animation) {
+            }
+        });
     }
 }//end class
