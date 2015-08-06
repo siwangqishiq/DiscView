@@ -21,6 +21,11 @@
         <!--圆形指示图片-->
         <attr name="dvIndicatorDraw" format="reference"/>
 
+        <!--圆盘开始旋转角度值-->
+        <attr name="dvStartRotateAngle" format="integer" />
+        <!--圆盘可旋转角度范围-->
+        <attr name="dvAngleRotateSpan" format="integer" />
+
         <!--圆盘模式-->
         <attr name="dvCircleMode">
             <enum name="normal" value="1" />

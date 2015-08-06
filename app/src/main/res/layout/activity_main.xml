@@ -14,10 +14,10 @@
         android:id="@+id/disc_view"
         android:layout_width="fill_parent"
         android:layout_height="220dp"
-        app:dvIndicatorDraw="@drawable/indicator"
-        app:dvCircleMode="round"
+        app:dvStartRotateAngle="40"
+        app:dvAngleRotateSpan="280"
+        app:dvCircleMode="dot"
         app:dvInnerCircleShow="true"
-        app:dvOuterCirclePad="8dp"
         app:dvBottomCircleIsShow="true"
         app:dvOuterCircleShow="false"
         app:dvStrokenWidth="11dp" />

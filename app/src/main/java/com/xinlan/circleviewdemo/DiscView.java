@@ -87,6 +87,11 @@ public class DiscView extends FrameLayout {
         if (bitDrawable != null) {
             indicatorBit = DiscViewUtils.drawableToBitmap(bitDrawable);
         }
+
+        //读取开始角度偏移量
+        mCircleView.startRotateAngle = a.getInteger(R.styleable.DiscView_dvStartRotateAngle,CircleView.MIN_VALUE);
+        //读取圆盘可旋转范围
+        mCircleView.angleRotateSpan = a.getInteger(R.styleable.DiscView_dvAngleRotateSpan,CircleView.MAX_VALUE);
         a.recycle();
 
         mCircleView.setStrokenWidth(mCircleView.stokenWidth);
@@ -95,8 +100,10 @@ public class DiscView extends FrameLayout {
         mCircleView.setRadiusColor(mCircleView.mRadiusColor);
         mCircleView.setInnerCircle(mCircleView.mInnerCircleIsShow, mCircleView.mInnerCirclePad);
         mCircleView.setBottomCircleShow(mCircleView.isBottomCircleShow);
-
         mCircleView.setIndicatorBit(indicatorBit);
+
+        mCircleView.setStartRotateAngle(mCircleView.startRotateAngle);
+        mCircleView.setAngleRotateSpan(mCircleView.angleRotateSpan);
     }
 
 
@@ -105,7 +112,7 @@ public class DiscView extends FrameLayout {
     }
 
     /**
-     * 设置指示器的值 0-360之间
+     * 设置指示器的值 min - max之间
      *
      * @param value
      */

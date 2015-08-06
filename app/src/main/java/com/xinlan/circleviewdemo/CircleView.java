@@ -20,7 +20,7 @@ import android.view.View;
 public class CircleView extends View {
     public static final int PAD = 10;
     public static final int MIN_VALUE = 0;
-    public static final int MAX_VALUE = 300;
+    public static final int MAX_VALUE = 360;
 
     private Context mContext;
 
@@ -50,6 +50,9 @@ public class CircleView extends View {
     private Bitmap indicatorBitmap;//圆形指示器Bitmap
     private RectF bitDistRect;
     private Rect bitSrcRect;
+
+    protected int startRotateAngle = MIN_VALUE;//圆盘开始角度 默认为最底部0度
+    protected int angleRotateSpan = MAX_VALUE;//圆盘可旋转角度范围
 
     public CircleView(Context context) {
         super(context);
@@ -95,8 +98,6 @@ public class CircleView extends View {
     protected void setIndicatorBit(Bitmap bit) {
         indicatorBitmap = bit;
         if (indicatorBitmap != null) {
-            System.out.println("w-->" + indicatorBitmap.getWidth());
-            System.out.println("h-->" + indicatorBitmap.getHeight());
             bitSrcRect = new Rect(0, 0, indicatorBitmap.getWidth(), indicatorBitmap.getHeight());
             bitDistRect = new RectF(0, 0, bitSrcRect.width(), bitSrcRect.height());
         }//end if
@@ -161,7 +162,7 @@ public class CircleView extends View {
         int centerY = h >> 1;
 
         canvas.save();
-        canvas.rotate(90, centerX, centerY);//坐标系旋转
+        canvas.rotate(90 + startRotateAngle, centerX, centerY);//坐标系旋转
 
         int outerCircleRadius = (Math.min(w, h) >> 1) - PAD;//外圆半径
         if (mOuterCircleIsShow) {//外装饰圆显示
@@ -176,7 +177,7 @@ public class CircleView extends View {
                 left + radius + radius, top + radius + radius);
         //绘制底部圆
         if (isBottomCircleShow) {//底部圆显示
-            canvas.drawArc(ovalRect, 0, 360, false, bottomPaint);
+            canvas.drawArc(ovalRect, 0, angleRotateSpan, false, bottomPaint);
         }
         //主圆绘制
         canvas.drawArc(ovalRect, 0, angle, false, paint);
@@ -213,13 +214,29 @@ public class CircleView extends View {
         bottomPaint.setStrokeWidth(stokenWidth);//底部圆圈宽度 应与主圆保持一致
     }
 
+    public int getStartRotateAngle() {
+        return startRotateAngle;
+    }
+
+    public void setStartRotateAngle(int startRotateAngle) {
+        this.startRotateAngle = startRotateAngle;
+    }
+
+    public int getAngleRotateSpan() {
+        return angleRotateSpan;
+    }
+
+    public void setAngleRotateSpan(int angleRotateSpan) {
+        this.angleRotateSpan = angleRotateSpan;
+    }
+
     /**
      * 设置数值
      *
      * @param value
      */
     public void setValue(int value) {
-        angle = value;
+        angle = Math.min(value, angleRotateSpan);
         invalidate();//重新设置数值
     }
 }//end class
