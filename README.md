@@ -14,7 +14,8 @@
 使用方式:
 
 xml布局:<br />
- <span><</span>com.xinlan.discview.DiscView<br/>
+ 《com.xinlan.discview.DiscView<br/>
+        xmlns:app="http://schemas.android.com/apk/res-auto"<br/>
         app:dvStrokenWidth="10dp"                         <br/> <!--圆盘宽度-->  <br/>
         app:dvStrokenColor="#000000"                     <br/> <!--圆盘颜色-->   <br/>
         app:dvOuterCircleShow="true"                      <br/> <!--外装饰圆是否显示-->   <br/>
@@ -29,7 +30,7 @@ xml布局:<br />
         android:layout_width="fill_parent" <br/>
         android:layout_height="220dp" /><br/>
 <br/>
-  code:
+  code:  <br />
         mDiscView.setValue(int value);//设置数值
 
 
