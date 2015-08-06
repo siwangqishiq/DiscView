@@ -18,7 +18,7 @@ import android.view.View;
  * Created by panyi on 2015/8/4.
  */
 public class CircleView extends View {
-    public static final int PAD = 2;
+    public static final int PAD = 10;
     public static final int MIN_VALUE = 0;
     public static final int MAX_VALUE = 300;
 
@@ -78,7 +78,7 @@ public class CircleView extends View {
         paint.setColor(mRadiusColor);//圆圈颜色
         paint.setStyle(Paint.Style.STROKE);//设置空心
         paint.setStrokeWidth(stokenWidth);//圆圈宽度设置
-        //paint.setAntiAlias(true);//反锯齿
+        paint.setAntiAlias(true);//反锯齿
 
         bottomPaint.setStyle(Paint.Style.STROKE);//设置空心
         bottomPaint.setStrokeWidth(stokenWidth);//圆圈宽度设置
@@ -181,25 +181,29 @@ public class CircleView extends View {
         //主圆绘制
         canvas.drawArc(ovalRect, 0, angle, false, paint);
 
-        //绘制指示器
-        if (indicatorBitmap != null) {
-            //角度制转弧度制
-            double radAngle = Math.toRadians(angle);
-            //圆的参数方程确定坐标点
-            int x = (int) (radius * Math.cos(radAngle)) + centerX;
-            int y = (int) (radius * Math.sin(radAngle)) + centerY;
-            bitDistRect.set(x, y, x + bitDistRect.width(), y + bitDistRect.height());
-            canvas.drawBitmap(indicatorBitmap, bitSrcRect, bitDistRect, null);
-        }//end if
-
         //内圆绘制
         if (mInnerCircleIsShow) {//内圆显示
             int innerRadius = radius - (stokenWidth >> 1) - mInnerCirclePad - EXTRA_CIRCLE_WIDTH;
             canvas.drawCircle(centerX, centerY, innerRadius, extraCirclePaint);
         }
 
+        //绘制指示器
+        if (indicatorBitmap != null) {
+            int bitWidth = indicatorBitmap.getWidth();
+            int bitHeight = indicatorBitmap.getHeight();
+
+            //角度制转弧度制
+            double radAngle = Math.toRadians(angle);
+            //圆的参数方程确定坐标点 极坐标
+            int x = (int) (radius * Math.cos(radAngle)) + centerX - (int) (bitDistRect.width() / 2);
+            int y = (int) (radius * Math.sin(radAngle)) + centerY - (int) (bitDistRect.height() / 2);
+            bitDistRect.set(x, y, x + bitDistRect.width(), y + bitDistRect.height());
+            canvas.drawBitmap(indicatorBitmap, bitSrcRect, bitDistRect, null);
+        }//end if
+
         canvas.restore();
     }
+
 
     public void setStrokenWidth(int size) {
         if (size <= 0)

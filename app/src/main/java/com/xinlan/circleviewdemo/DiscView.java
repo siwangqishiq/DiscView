@@ -20,7 +20,7 @@ import com.nineoldandroids.animation.ValueAnimator;
  * Created by panyi on 2015/8/4.
  */
 public class DiscView extends FrameLayout {
-    public static final int ANIMATION_DURING = 1300;
+    public static final int ANIMATION_DURING = 1100;
 
     private Context mContext;
     private CircleView mCircleView;
@@ -99,14 +99,24 @@ public class DiscView extends FrameLayout {
         mCircleView.setIndicatorBit(indicatorBit);
     }
 
+
     public void setValue(int value) {
+        setValue(value, ANIMATION_DURING);
+    }
+
+    /**
+     * 设置指示器的值 0-360之间
+     *
+     * @param value
+     */
+    public void setValue(int value, int duration) {
         if (animator.isRunning()) {//上次动画未结束
             animator.cancel();//取消上次动画
         }
 
         animator = ValueAnimator.ofInt(0, value);
         animator.setInterpolator(new AccelerateDecelerateInterpolator());//先加速 后减速差值
-        animator.setDuration(ANIMATION_DURING);
+        animator.setDuration(duration);
         animator.start();
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
